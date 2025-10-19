@@ -4,11 +4,7 @@ kind: Kustomization
 namespace: staging
 
 resources:
-  - ../../base
-
-replicas:
-  - name: tic-tac-toe
-    count: 1
+  - ./resources/
 
 commonLabels:
   environment: staging

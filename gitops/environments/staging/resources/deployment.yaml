@@ -1,0 +1,26 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: tic-tac-toe
+  labels:
+    app: tic-tac-toe
+    environment: staging
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: tic-tac-toe
+  template:
+    metadata:
+      labels:
+        app: tic-tac-toe
+        environment: staging
+    spec:
+      containers:
+      - name: tic-tac-toe
+        image: nginx:latest  # Replace with your actual image
+        ports:
+        - containerPort: 80
+        env:
+        - name: ENVIRONMENT
+          value: "staging"
