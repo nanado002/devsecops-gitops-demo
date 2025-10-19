@@ -1,41 +1,98 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Tic Tac Toe 🚀 GitOps Live! - GitOps Demo</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tic Tac Toe - GitOps Demo</title>
     <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
         body {
-            font-family: Arial, sans-serif;
-            background: linear-gradient(135deg, #667eea, #764ba2);
-            margin: 0;
-            padding: 0;
+            font-family: 'Arial', sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
             display: flex;
             justify-content: center;
             align-items: center;
-            min-height: 100vh;
             color: white;
         }
         .container {
-            background: rgba(255,255,255,0.1);
-            padding: 2rem;
-            border-radius: 15px;
-            text-align: center;
+            background: rgba(255, 255, 255, 0.1);
             backdrop-filter: blur(10px);
+            padding: 3rem;
+            border-radius: 20px;
+            text-align: center;
+            max-width: 600px;
+            width: 90%;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+        h1 {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        }
+        .gitops-badge {
+            background: linear-gradient(45deg, #28a745, #20c997);
+            color: white;
+            padding: 0.8rem 1.5rem;
+            border-radius: 25px;
+            font-size: 1.1rem;
+            margin: 1.5rem 0;
+            display: inline-block;
+            box-shadow: 0 4px 15px rgba(40, 167, 69, 0.3);
+        }
+        .deployment-info {
+            background: rgba(255, 255, 255, 0.1);
+            padding: 1.5rem;
+            border-radius: 15px;
+            margin-top: 2rem;
+            text-align: left;
+        }
+        .status-indicator {
+            display: inline-block;
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            background: #28a745;
+            margin-right: 8px;
+            animation: pulse 2s infinite;
+        }
+        @keyframes pulse {
+            0% { opacity: 1; }
+            50% { opacity: 0.5; }
+            100% { opacity: 1; }
         }
     </style>
 </head>
 <body>
-<!-- Deployment Information -->
-<div style="background: #f0f8ff; padding: 20px; border-radius: 10px; margin: 20px 0;">
-    <h3>🚀 GitOps Deployment Info</h3>
-    <p><strong>Version:</strong> 1.0.0</p>
-    <p><strong>Deployed:</strong> $(date)</p>
-    <p><strong>Pipeline:</strong> GitHub Actions → ArgoCD → Kubernetes</p>
-    <p><strong>Status:</strong> 🟢 Operational</p>
-</div>
     <div class="container">
-        <h1>🎯 Tic Tac Toe 🚀 GitOps Live!</h1>
-        <p>Deployed via GitOps Pipeline with ArgoCD</p>
-        <p>Deployed automatically on every change!</p>
+        <h1>🎯 Tic Tac Toe</h1>
+        <div class="gitops-badge">
+            🚀 GitOps Powered - Automated Deployment
+        </div>
+        
+        <div class="deployment-info">
+            <h3>🔄 Deployment Information</h3>
+            <p><span class="status-indicator"></span><strong>Status:</strong> Live & Healthy</p>
+            <p><strong>Environment:</strong> <span id="environment">Production</span></p>
+            <p><strong>Deployment Method:</strong> GitOps with ArgoCD</p>
+            <p><strong>Last CI/CD Run:</strong> <span id="timestamp">Loading...</span></p>
+            <p><strong>Pipeline:</strong> GitHub Actions → ArgoCD → Kubernetes</p>
+        </div>
+
+        <!-- Deployment Marker -->
+        <div style="margin-top: 2rem; padding: 1rem; background: rgba(255,255,255,0.1); border-radius: 10px;">
+            <h4>✅ CI/CD Pipeline Active</h4>
+            <p>This page was deployed automatically via GitOps</p>
+            <p>Commit: <span id="commit-sha">$(git rev-parse --short HEAD)</span></p>
+        </div>
     </div>
+
+    <script>
+        document.getElementById('timestamp').textContent = new Date().toLocaleString();
+        // Environment detection
+        if (window.location.port === '28081') {
+            document.getElementById('environment').textContent = 'Staging';
+        }
+    </script>
 </body>
 </html>
