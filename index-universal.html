@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tic Tac Toe - GitOps Success</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: 'Arial', sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            color: white;
+        }
+        .container {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            padding: 3rem;
+            border-radius: 20px;
+            text-align: center;
+            max-width: 700px;
+            width: 90%;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+        h1 {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        }
+        .success-badge {
+            background: linear-gradient(45deg, #28a745, #20c997);
+            color: white;
+            padding: 1rem 2rem;
+            border-radius: 25px;
+            font-size: 1.2rem;
+            margin: 1.5rem 0;
+            display: inline-block;
+            box-shadow: 0 4px 15px rgba(40, 167, 69, 0.3);
+        }
+        .access-info {
+            background: rgba(255, 255, 255, 0.1);
+            padding: 1.5rem;
+            border-radius: 15px;
+            margin: 1rem 0;
+            text-align: left;
+        }
+        .access-link {
+            color: #20c997;
+            text-decoration: none;
+            display: block;
+            margin: 0.5rem 0;
+            padding: 0.5rem;
+            background: rgba(255,255,255,0.1);
+            border-radius: 5px;
+        }
+        .access-link:hover {
+            background: rgba(255,255,255,0.2);
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>🎯 Tic Tac Toe</h1>
+        <div class="success-badge">
+            ✅ GITOPS PIPELINE SUCCESS!
+        </div>
+        
+        <div class="access-info">
+            <h3>🚀 Deployment Information</h3>
+            <p><strong>Environment:</strong> <span id="environment">Loading...</span></p>
+            <p><strong>Access Method:</strong> <span id="access-method">Loading...</span></p>
+            <p><strong>URL:</strong> <span id="current-url">Loading...</span></p>
+            <p><strong>GitOps Status:</strong> Automated via ArgoCD</p>
+        </div>
+
+        <div class="access-info">
+            <h3>🌐 Available Access Methods</h3>
+            <a href="http://localhost/staging" class="access-link">Path: http://localhost/staging</a>
+            <a href="http://localhost/production" class="access-link">Path: http://localhost/production</a>
+            <a href="http://staging.localhost" class="access-link">Host: http://staging.localhost</a>
+            <a href="http://production.localhost" class="access-link">Host: http://production.localhost</a>
+        </div>
+
+        <div style="margin-top: 2rem; padding: 1rem; background: rgba(255,255,255,0.1); border-radius: 10px;">
+            <h4>📊 GitOps Pipeline Active</h4>
+            <p>Changes are automatically deployed via GitHub Actions → ArgoCD</p>
+            <p><strong>Commit:</strong> <span id="commit-sha">$(git rev-parse --short HEAD)</span></p>
+        </div>
+    </div>
+
+    <script>
+        // Detect environment and access method
+        const currentUrl = window.location.href;
+        document.getElementById('current-url').textContent = currentUrl;
+        
+        if (currentUrl.includes('staging.localhost') || currentUrl.includes('/staging')) {
+            document.getElementById('environment').textContent = 'Staging';
+        } else if (currentUrl.includes('production.localhost') || currentUrl.includes('/production')) {
+            document.getElementById('environment').textContent = 'Production';
+        }
+        
+        if (currentUrl.includes('localhost')) {
+            document.getElementById('access-method').textContent = 'Kubernetes Ingress';
+        }
+    </script>
+</body>
+</html>

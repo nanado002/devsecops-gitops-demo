@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tic Tac Toe - GitOps via Ingress</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: 'Arial', sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            color: white;
+        }
+        .container {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            padding: 3rem;
+            border-radius: 20px;
+            text-align: center;
+            max-width: 600px;
+            width: 90%;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+        h1 {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        }
+        .success-badge {
+            background: linear-gradient(45deg, #28a745, #20c997);
+            color: white;
+            padding: 1rem 2rem;
+            border-radius: 25px;
+            font-size: 1.2rem;
+            margin: 1.5rem 0;
+            display: inline-block;
+            box-shadow: 0 4px 15px rgba(40, 167, 69, 0.3);
+        }
+        .deployment-info {
+            background: rgba(255, 255, 255, 0.1);
+            padding: 1.5rem;
+            border-radius: 15px;
+            margin-top: 2rem;
+            text-align: left;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>🎯 Tic Tac Toe</h1>
+        <div class="success-badge">
+            ✅ SUCCESS! Accessed via Kubernetes Ingress
+        </div>
+        
+        <div class="deployment-info">
+            <h3>🚀 Deployment Information</h3>
+            <p><strong>Status:</strong> Live via Ingress Controller</p>
+            <p><strong>Access Method:</strong> Kubernetes Ingress</p>
+            <p><strong>URL:</strong> <span id="current-url">Loading...</span></p>
+            <p><strong>GitOps:</strong> ArgoCD Automated Deployment</p>
+        </div>
+
+        <div style="margin-top: 2rem; padding: 1rem; background: rgba(255,255,255,0.1); border-radius: 10px;">
+            <h4>🌐 Available Environments:</h4>
+            <p><a href="http://localhost/staging" style="color: #20c997;">Staging: http://localhost/staging</a></p>
+            <p><a href="http://localhost/production" style="color: #20c997;">Production: http://localhost/production</a></p>
+            <p><a href="http://staging.localhost" style="color: #20c997;">Staging (Host): http://staging.localhost</a></p>
+            <p><a href="http://production.localhost" style="color: #20c997;">Production (Host): http://production.localhost</a></p>
+        </div>
+    </div>
+
+    <script>
+        document.getElementById('current-url').textContent = window.location.href;
+    </script>
+</body>
+</html>
